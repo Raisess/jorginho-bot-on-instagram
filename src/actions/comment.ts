@@ -29,8 +29,6 @@ export const comment = async (page: any): Promise<void> => {
 			await commentFuction(page, delay, toComment);
 			
 			count++;
-		} else {
-			return;
 		}
 	}, delay * 60000);
 }
