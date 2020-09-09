@@ -1,4 +1,4 @@
 /node_modules
 /build
-config.json
+/src/config.json
 
