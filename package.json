@@ -27,10 +27,12 @@
   },
   "homepage": "https://github.com/Raisess/jorginho-bot-on-instagram#readme",
   "dependencies": {
-    "puppeteer": "^5.2.1"
+    "puppeteer": "^5.2.1",
+    "readline-sync": "^1.4.10"
   },
   "devDependencies": {
     "@types/puppeteer": "^3.0.2",
+    "@types/readline-sync": "^1.4.3",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
   }
