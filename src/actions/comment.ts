@@ -1,18 +1,21 @@
 import { question } from 'readline-sync';
 
+// utils
+import { getRandomComment } from '../utils/getRandomComment';
+
 const timesToComment: number = parseInt(question('times to comment: '));
 let count = 1;
 
 export const comment = async (page: any): Promise<void> => {
 	const delay:   number = 0.5;
-	let toComment: string = 'teste';
+	let toComment: string = getRandomComment('');
 
 	// comment trigger
 	await commentFuction(page, delay, toComment);
 
 	setInterval(async (): Promise<void> => {
 		if (count < timesToComment) {
-			toComment = 'teste 2'; // get new comment text
+			toComment = getRandomComment(toComment); // get new comment text
 
 			// comment trigger
 			await commentFuction(page, delay, toComment);
