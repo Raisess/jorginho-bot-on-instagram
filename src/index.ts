@@ -21,6 +21,5 @@ import { comment } from './actions/comment';
 	await goToPost(page);
 	// comment on post
 	await comment(page);
-
 })();
 
