@@ -36,7 +36,7 @@ export const comment = async (page: any): Promise<void> => {
 }
 
 const commentFuction = async (page: any, delay: number, _comment: string): Promise<void> => {
-	const navigationPromise = page.waitForNavigation({ timeout: delay * 60000 });
+	const navigationPromise: void = page.waitForNavigation();
 
 	// click on comment field
 	await page.waitForSelector('textarea[class="Ypffh"]');
