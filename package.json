@@ -1,0 +1,37 @@
+{
+  "name": "jorginho-bot-on-instagram",
+  "version": "1.0.0",
+  "description": "A jorginho bot instagram version.",
+  "main": "./src/index.ts",
+  "scripts": {
+    "start": "node ./build/index.js",
+    "compile": "tsc -p ./tsconfig.json",
+    "start-dev": "ts-node ./src/index.ts",
+    "clean": "rm -r ./build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raisess/jorginho-bot-on-instagram.git"
+  },
+  "keywords": [
+    "bot",
+    "instagram",
+    "typescript",
+    "puppetter"
+  ],
+  "author": "Raisess",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Raisess/jorginho-bot-on-instagram/issues"
+  },
+  "homepage": "https://github.com/Raisess/jorginho-bot-on-instagram#readme",
+  "dependencies": {
+    "puppeteer": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^3.0.2",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  }
+}
