@@ -9,7 +9,7 @@ const typeOfComment:  string = question('type of comments [male, female, other]:
 let count = 1;
 
 export const comment = async (page: any): Promise<void> => {
-	const delay:   number = 0.5;
+	const delay:   number = 0.1;
 	let toComment: string = getRandomComment(typeOfComment, '');
 
 	// comment trigger
