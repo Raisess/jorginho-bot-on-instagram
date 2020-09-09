@@ -47,7 +47,7 @@ const commentFuction = async (page: any, delay: number, _comment: string): Promi
 
 	// send comment
 	await page.waitForSelector('button[type="submit"]');
-	//await page.click('button[type="submit"]');
+	await page.click('button[type="submit"]');
 
 	await navigationPromise;
 }
