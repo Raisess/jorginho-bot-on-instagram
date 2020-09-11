@@ -28,12 +28,14 @@ const translate = async (text: string, from: string, to: string): Promise<string
 		})
 	});
 
-	const response = await request.json();
-	// console.log(response);
+	try {
+		const response = await request.json();
+		const translation: string = await response.translation.join(' ');
 
-	const translation: string = await response.translation.join(' ');
-
-	return translation;
+		return translation;
+	} catch (e) {
+		return translate(text, from, to)
+	}
 }
 
 export default translate;

@@ -22,6 +22,7 @@ const translateTo:    string = question('translate comment to another language [
 
 	const page: any = await browser.newPage();
 
+	// ACTIONS
 	// make login
 	await login(page);
 	// go to post page
@@ -32,5 +33,8 @@ const translateTo:    string = question('translate comment to another language [
 	await save(page);
 	// comment on post
 	await comment(page, translateTo != '' ? translateTo : false, timesToComment, typeOfComment);
+	
+	// close browser
+	//await browser.close();
 })();
 
