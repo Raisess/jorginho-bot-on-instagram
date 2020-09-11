@@ -10,6 +10,7 @@ import { comment } from './actions/comment';
 // options
 const timesToComment: number = parseInt(question('times to comment: '));
 const typeOfComment:  string = question('type of comments [male, female, other]: ');
+const translateTo:    string = question('translate comment to another language [eng, ger, jpn, frc]: ');
 
 (async () => {
 	// browser launch config
@@ -30,6 +31,6 @@ const typeOfComment:  string = question('type of comments [male, female, other]:
 	// save the post
 	await save(page);
 	// comment on post
-	await comment(page, timesToComment, typeOfComment);
+	await comment(page, translateTo != '' ? translateTo : false, timesToComment, typeOfComment);
 })();
 

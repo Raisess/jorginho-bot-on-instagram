@@ -1,10 +1,12 @@
 // utils
 import { getRandomComment } from '../utils/getRandomComment';
+// modules
+import translate from '../modules/translate';
 
-export const comment = async (page: any, timesToComment: number, typeOfComment: string): Promise<void> => {
+export const comment = async (page: any, translateTo: string | boolean, timesToComment: number, typeOfComment: string): Promise<void> => {
 	const delay:     number = 0.1;
 	let   count:     number = 1;
-	let   toComment: string = getRandomComment(typeOfComment, '');
+	let   toComment: string = typeof translateTo == 'string' ? await translate(getRandomComment(typeOfComment, ''), 'por', translateTo) : getRandomComment(typeOfComment, '');
 
 	// comment trigger
 	await commentFuction(page, toComment);
@@ -17,7 +19,8 @@ export const comment = async (page: any, timesToComment: number, typeOfComment: 
 
 	setInterval(async (): Promise<void> => {
 		if (count < timesToComment) {
-			toComment = getRandomComment(typeOfComment, toComment); // get new comment text
+			// get a comment != of last comment
+	  	toComment = typeof translateTo == 'string' ? await translate(getRandomComment(typeOfComment, toComment), 'por', translateTo) : getRandomComment(typeOfComment, toComment);
 
 			// comment trigger
 			await commentFuction(page, toComment);
