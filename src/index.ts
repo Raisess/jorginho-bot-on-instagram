@@ -1,10 +1,15 @@
 import { launch } from 'puppeteer'; 
+import { question } from 'readline-sync';
 
 // actions
 import { login } from './actions/login';
 import { goToPost } from './actions/goToPost';
 import { like, save } from './actions/likeAndSave';
 import { comment } from './actions/comment';
+
+// options
+const timesToComment: number = parseInt(question('times to comment: '));
+const typeOfComment:  string = question('type of comments [male, female, other]: ');
 
 (async () => {
 	// browser launch config
@@ -25,6 +30,6 @@ import { comment } from './actions/comment';
 	// save the post
 	await save(page);
 	// comment on post
-	await comment(page);
+	await comment(page, timesToComment, typeOfComment);
 })();
 

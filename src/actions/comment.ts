@@ -1,19 +1,13 @@
-import { question } from 'readline-sync';
-
 // utils
 import { getRandomComment } from '../utils/getRandomComment';
 
-const timesToComment: number = parseInt(question('times to comment: '));
-const typeOfComment:  string = question('type of comments [male, female, other]: ');
-
-let count = 1;
-
-export const comment = async (page: any): Promise<void> => {
-	const delay:   number = 0.1;
-	let toComment: string = getRandomComment(typeOfComment, '');
+export const comment = async (page: any, timesToComment: number, typeOfComment: string): Promise<void> => {
+	const delay:     number = 0.1;
+	let   count:     number = 1;
+	let   toComment: string = getRandomComment(typeOfComment, '');
 
 	// comment trigger
-	await commentFuction(page, delay, toComment);
+	await commentFuction(page, toComment);
 
 	if (count == timesToComment) {
 		console.log('finished!');
@@ -26,14 +20,14 @@ export const comment = async (page: any): Promise<void> => {
 			toComment = getRandomComment(typeOfComment, toComment); // get new comment text
 
 			// comment trigger
-			await commentFuction(page, delay, toComment);
+			await commentFuction(page, toComment);
 			
 			count++;
 		}
 	}, delay * 60000);
 }
 
-const commentFuction = async (page: any, delay: number, _comment: string): Promise<void> => {
+const commentFuction = async (page: any, _comment: string): Promise<void> => {
 	// click on comment field
 	await page.waitForSelector('textarea[class="Ypffh"]');
 	await page.click('textarea[class="Ypffh"]');
