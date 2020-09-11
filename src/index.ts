@@ -3,6 +3,7 @@ import { launch } from 'puppeteer';
 // actions
 import { login } from './actions/login';
 import { goToPost } from './actions/goToPost';
+import { like, save } from './actions/likeAndSave';
 import { comment } from './actions/comment';
 
 (async () => {
@@ -19,6 +20,10 @@ import { comment } from './actions/comment';
 	await login(page);
 	// go to post page
 	await goToPost(page);
+	// like the post
+	await like(page);
+	// save the post
+	await save(page);
 	// comment on post
 	await comment(page);
 })();
