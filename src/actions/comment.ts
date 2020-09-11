@@ -6,7 +6,7 @@ import { getRandomComment } from '../utils/getRandomComment';
 const timesToComment: number = parseInt(question('times to comment: '));
 const typeOfComment:  string = question('type of comments [male, female, other]: ');
 
-let count = 0;
+let count = 1;
 
 export const comment = async (page: any): Promise<void> => {
 	const delay:   number = 0.1;
@@ -34,8 +34,6 @@ export const comment = async (page: any): Promise<void> => {
 }
 
 const commentFuction = async (page: any, delay: number, _comment: string): Promise<void> => {
-	const navigationPromise: void = page.waitForNavigation();
-
 	// click on comment field
 	await page.waitForSelector('textarea[class="Ypffh"]');
 	await page.click('textarea[class="Ypffh"]');
@@ -46,7 +44,5 @@ const commentFuction = async (page: any, delay: number, _comment: string): Promi
 	// send comment
 	await page.waitForSelector('button[type="submit"]');
 	await page.click('button[type="submit"]');
-
-	await navigationPromise;
 }
 
