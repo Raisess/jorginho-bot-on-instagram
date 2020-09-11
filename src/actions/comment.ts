@@ -6,7 +6,7 @@ import { getRandomComment } from '../utils/getRandomComment';
 const timesToComment: number = parseInt(question('times to comment: '));
 const typeOfComment:  string = question('type of comments [male, female, other]: ');
 
-let count = 1;
+let count = 0;
 
 export const comment = async (page: any): Promise<void> => {
 	const delay:   number = 0.1;
