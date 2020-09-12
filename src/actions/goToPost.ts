@@ -1,8 +1,6 @@
 import { question } from 'readline-sync';
 
-const postUrl: string = question('post url: ');
-
-export const goToPost = async (page: any): Promise<void> => {	
+export const goToPost = async (page: any, postUrl: string): Promise<void> => {	
 	const navigationPromise: void = page.waitForNavigation();
 	await navigationPromise;
 
