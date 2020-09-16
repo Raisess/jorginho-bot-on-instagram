@@ -1,8 +1,11 @@
 import { launch } from 'puppeteer'; 
 import { question } from 'readline-sync';
 
-// actions
+// actions modules
 import { login } from './actions/login';
+// followBack
+import { followBack } from './actions/followBack';
+// like/comment/save
 import { goToPost } from './actions/goToPost';
 import { like, save } from './actions/likeAndSave';
 import { comment } from './actions/comment';
@@ -26,9 +29,9 @@ const actionType: number = parseInt(question('action type [1 = follow-back, 2 = 
 
 	// check the action type
 	switch (actionType) {
-		// TODO: create the follow-back bot followers action
+		// follow-back bot followers action
 		case 1:
-			console.log("don't have the first option...");
+			await followBack(page);
 
 			break;
 		// if is to like/save/comment
