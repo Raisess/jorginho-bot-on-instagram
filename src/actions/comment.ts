@@ -7,6 +7,8 @@ export const comment = async (page: any, translateTo: string | boolean, timesToC
 	const delay:     number = 0.1;
 	let   count:     number = 1;
 	let   toComment: string = typeof translateTo == 'string' ? await translate(getRandomComment(typeOfComment, ''), 'por', translateTo) : getRandomComment(typeOfComment, '');
+	
+	console.log(count, ':', toComment);
 
 	// comment trigger
 	await commentFuction(page, toComment);
@@ -19,13 +21,14 @@ export const comment = async (page: any, translateTo: string | boolean, timesToC
 
 	setInterval(async (): Promise<void> => {
 		if (count < timesToComment) {
+			count++;
 			// get a comment != of last comment
 	  	toComment = typeof translateTo == 'string' ? await translate(getRandomComment(typeOfComment, toComment), 'por', translateTo) : getRandomComment(typeOfComment, toComment);
-
-			// comment trigger
-			await commentFuction(page, toComment);
 			
-			count++;
+			console.log(count, ':', toComment);
+	
+			// comment trigger
+			await commentFuction(page, toComment);	
 		}
 	}, delay * 60000);
 }
