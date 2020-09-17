@@ -13,7 +13,7 @@ import { comment } from './actions/comment';
 // change action type
 const actionType: number = parseInt(question('action type [1 = follow-back, 2 = like/save/comment]: '));
 
-(async (): Promise<void> => {
+const startBrowser = async (): Promise<any> => {
 	// browser launch config
 	const browser: any = await launch({ 
 	  args:            ['--window-size=770,720'],
@@ -23,14 +23,20 @@ const actionType: number = parseInt(question('action type [1 = follow-back, 2 = 
 
 	const page: any = await browser.newPage();
 
-	// ACTIONS
-	// make login
-	await login(page);
+	return page;
+}
 
+(async (): Promise<void> => {
+	// ACTIONS
 	// check the action type
 	switch (actionType) {
 		// follow-back bot followers action
 		case 1:
+			const page: any = await startBrowser();
+
+			// make login
+			await login(page);
+			// follow backe
 			await followBack(page);
 
 			break;
@@ -44,14 +50,18 @@ const actionType: number = parseInt(question('action type [1 = follow-back, 2 = 
 			const typeOfComment:  string = question('type of comments [male, female, other]: ');
 			const translateTo:    string = question('translate comment to another language [eng, ger, jpn, frc]: ');
 
+			const page_: any = await startBrowser();
+
+			// make login
+			await login(page_);
 			// go to post page
-			await goToPost(page, postUrl);
+			await goToPost(page_, postUrl);
 			// like the post
-			await like(page);
+			await like(page_);
 			// save the post
-			await save(page);
+			await save(page_);
 			// comment on post
-			await comment(page, translateTo != '' ? translateTo : false, timesToComment, typeOfComment);
+			await comment(page_, translateTo != 'por' ? translateTo : false, timesToComment, typeOfComment);
 
 			break;
 		default:
