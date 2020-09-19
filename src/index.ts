@@ -5,13 +5,15 @@ import { question } from 'readline-sync';
 import { login } from './actions/login';
 // followBack
 import { followBack } from './actions/followBack';
+// unfollow
+import { unfollowNotFollowers } from './actions/unfollowNotFollowers';
 // like/comment/save
 import { goToPost } from './actions/goToPost';
 import { like, save } from './actions/likeAndSave';
 import { comment } from './actions/comment';
 
 // change action type
-const actionType: number = parseInt(question('action type [1 = follow-back, 2 = like/save/comment]: '));
+const actionType: number = parseInt(question('action type [1 = follow-back, 2 = unfollow-not-followers, 3 = like/save/comment]: '));
 
 const startBrowser = async (): Promise<any> => {
 	// browser launch config
@@ -40,8 +42,17 @@ const startBrowser = async (): Promise<any> => {
 			await followBack(page);
 
 			break;
-		// if is to like/save/comment
 		case 2:
+			const page__: any = await startBrowser();
+
+			// make login
+			await login(page__);
+			// unfollowNotFollowers
+			await unfollowNotFollowers(page__);
+
+			break;
+		// if is to like/save/comment
+		case 3:
 			// post to go
 			const postUrl:        string = question('post url: ');
 
