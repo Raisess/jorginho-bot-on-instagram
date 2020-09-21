@@ -1,5 +1,5 @@
-export const autoScroll = async (element: any): Promise<void> => {
-  await element.evaluate(async (): Promise<void> => {
+export const autoScroll = async (page: any, element: any): Promise<void> => {
+  await page.evaluate(async (): Promise<void> => {
     await new Promise((resolve: any, reject: any) => {
       let totalHeight: number = 0;
       let distance:    number = 100;
@@ -19,6 +19,6 @@ export const autoScroll = async (element: any): Promise<void> => {
         }
       }, 100);
     });
-  });
+  }, element);
 }
 
