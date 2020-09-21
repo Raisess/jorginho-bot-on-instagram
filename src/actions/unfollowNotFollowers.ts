@@ -1,20 +1,19 @@
 import { username } from '../config.json'
-
-interface IStorage {
-	followers:     Array<string>;
-	following:     Array<string>;
-	notReciprocal: Array<string>;
-	difference:    number;
-}
+// interfaces
+import { IStorage } from '../interfaces/IStorage';
+// utils
+import { autoScroll } from '../utils/autoScroll';
 
 export const unfollowNotFollowers = async (page: any): Promise<void> => {
 	const waitNavigationPromise: void = await page.waitForNavigation();
 
 	let storage: IStorage = {
-		followers:     [],
-		following:     [],
-		notReciprocal: [],
-		difference:    0
+		followersNumber:  0,
+		followers:        [],
+		followingNumber:  0,
+		following:        [],
+		notReciprocal:    [],
+		difference:       0
 	};
 
 	// go to profile page
@@ -26,9 +25,13 @@ export const unfollowNotFollowers = async (page: any): Promise<void> => {
 	await page.click(`a[href="/${username}/followers/"]`);
 	await waitNavigationPromise;
 
-	setTimeout(async () => {	
+	setTimeout(async (): Promise<void> => {	
+		await autoScroll(page, 'isgrP');
+
 		// scrap followers section html
 		const followersArr: Array<any> = await page.$x('//*[@class="PZuss"]//li');
+
+		storage.followersNumber = followersArr.length;
 
 		for (let follower_ of followersArr) {
 			const follower: string = await page.evaluate((elm: any) => elm.innerText, follower_);
@@ -46,9 +49,13 @@ export const unfollowNotFollowers = async (page: any): Promise<void> => {
 		await page.click(`a[href="/${username}/following/"]`);
 		await waitNavigationPromise;
 
-		setTimeout(async () => {
+		setTimeout(async (): Promise<void> => {
+			await autoScroll(page, 'isgrP');
+
 			// scrap following section html
 			const followingArr: Array<any> = await page.$x('//*[@class="PZuss"]//li');
+
+			storage.followingNumber = followingArr.length;
 
 			for (let following_ of followingArr) {
 				const following: string = await page.evaluate((elm: any) => elm.innerText, following_);
