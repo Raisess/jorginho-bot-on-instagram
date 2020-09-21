@@ -1,5 +1,6 @@
 // utils
 import { getRandomComment } from '../utils/getRandomComment';
+import { log } from '../utils/debug';
 // modules
 import translate from '../modules/translate';
 
@@ -8,7 +9,7 @@ export const comment = async (page: any, translateTo: string | boolean, timesToC
 	let   count:     number = 1;
 	let   toComment: string = typeof translateTo == 'string' ? await translate(getRandomComment(typeOfComment, ''), 'por', translateTo) : getRandomComment(typeOfComment, '');
 	
-	console.log(count, ':', toComment);
+	log(count, ':', toComment);
 
 	// comment trigger
 	await commentFuction(page, toComment);
@@ -25,7 +26,7 @@ export const comment = async (page: any, translateTo: string | boolean, timesToC
 			// get a comment != of last comment
 	  	toComment = typeof translateTo == 'string' ? await translate(getRandomComment(typeOfComment, toComment), 'por', translateTo) : getRandomComment(typeOfComment, toComment);
 			
-			console.log(count, ':', toComment);
+			log(count, ':', toComment);
 	
 			// comment trigger
 			await commentFuction(page, toComment);	

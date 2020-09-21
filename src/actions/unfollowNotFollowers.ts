@@ -3,6 +3,7 @@ import { username } from '../config.json'
 import { IStorage } from '../interfaces/IStorage';
 // utils
 import { autoScroll } from '../utils/autoScroll';
+import { log } from '../utils/debug';
 
 export const unfollowNotFollowers = async (page: any): Promise<void> => {
 	const waitNavigationPromise: void = await page.waitForNavigation();
@@ -73,7 +74,7 @@ export const unfollowNotFollowers = async (page: any): Promise<void> => {
 			// difference set
 			storage.difference = storage.notReciprocal.length;
 
-			console.log(storage);
+			log(storage);
 
 			return;
 		}, 3000);
