@@ -1,13 +1,14 @@
-export const autoScroll = async (page: any, element: any): Promise<void> => {
-  await page.evaluate(async (): Promise<void> => {
+export const autoScroll = async (page: any, className_: string): Promise<void> => {
+  await page.evaluate(async (className_: string): Promise<void> => {
     await new Promise((resolve: any, reject: any) => {
+			const element:   any    = document.querySelector(`.${className_}`);
       let totalHeight: number = 0;
       let distance:    number = 100;
 
       const timer = setInterval(() => {
-	      const scrollHeight: number = document.body.scrollHeight;
+	      const scrollHeight: number = element.scrollHeight;
 
-        window.scrollBy(0, distance);
+        element.scrollBy(0, distance);
 
 	      totalHeight += distance;
 
@@ -19,6 +20,6 @@ export const autoScroll = async (page: any, element: any): Promise<void> => {
         }
       }, 100);
     });
-  }, element);
+  }, className_);
 }
 
