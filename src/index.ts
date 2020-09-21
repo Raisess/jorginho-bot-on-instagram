@@ -29,54 +29,43 @@ const startBrowser = async (): Promise<any> => {
 }
 
 (async (): Promise<void> => {
-	// ACTIONS
-	// check the action type
-	switch (actionType) {
-		// follow-back bot followers action
-		case 1:
-			const page: any = await startBrowser();
+	if (actionType == 1) { // follow-back bot followers action
+		const page: any = await startBrowser();
 
-			// make login
-			await login(page);
-			// follow backe
-			await followBack(page);
+		// make login
+		await login(page);
+		// follow backe
+		await followBack(page);
+	} else if (actionType == 2) { // unfollow not mutuals
+		const page: any = await startBrowser();
 
-			break;
-		case 2:
-			const page__: any = await startBrowser();
+		// make login
+		await login(page);
+		// unfollowNotFollowers
+		await unfollowNotFollowers(page);
+	} else if (actionType == 3) { // like/save/comment
+		// post to go
+		const postUrl:        string = question('post url: ');
 
-			// make login
-			await login(page__);
-			// unfollowNotFollowers
-			await unfollowNotFollowers(page__);
+		// comment options
+		const timesToComment: number = parseInt(question('times to comment: '));
+		const typeOfComment:  string = question('type of comments [male, female, other]: ');
+		const translateTo:    string = question('translate comment to another language [eng, ger, jpn, frc]: ');
 
-			break;
-		// if is to like/save/comment
-		case 3:
-			// post to go
-			const postUrl:        string = question('post url: ');
+		const page: any = await startBrowser();
 
-			// comment options
-			const timesToComment: number = parseInt(question('times to comment: '));
-			const typeOfComment:  string = question('type of comments [male, female, other]: ');
-			const translateTo:    string = question('translate comment to another language [eng, ger, jpn, frc]: ');
-
-			const page_: any = await startBrowser();
-
-			// make login
-			await login(page_);
-			// go to post page
-			await goToPost(page_, postUrl);
-			// like the post
-			await like(page_);
-			// save the post
-			await save(page_);
-			// comment on post
-			await comment(page_, translateTo != 'por' ? translateTo : false, timesToComment, typeOfComment);
-
-			break;
-		default:
-			break;
+		// make login
+		await login(page);
+		// go to post page
+		await goToPost(page, postUrl);
+		// like the post
+		await like(page);
+		// save the post
+		await save(page);
+		// comment on post
+		await comment(page, translateTo != 'por' ? translateTo : false, timesToComment, typeOfComment);
+	} else {
+		throw new Error(`${actionType} is an invalid action type!`);
 	}
 
 	// close browser
